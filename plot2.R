@@ -18,8 +18,12 @@ uciEpcData$Global_active_power <- as.numeric(uciEpcData$Global_active_power)
 targetDates <- c("1/2/2007", "2/2/2007")
 uciEpcDataSubset <- filter(uciEpcData, Date %in% targetDates)
 
+# Create a column for the combined date and time
+uciEpcDataSubset$DateTime <- paste(uciEpcDataSubset$Date, uciEpcDataSubset$Time)
+uciEpcDataSubset$DateTime <- as.POSIXct(uciEpcDataSubset$DateTime, format = "%d/%m/%Y %H:%M:%S")
+
 # Create the plot
-png(width = 480, height = 480, filename = "plot1.png")
-with(uciEpcDataSubset, hist(Global_active_power, col= "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)"))
+png(width = 480, height = 480, filename = "plot2.png")
+with(uciEpcDataSubset, plot(DateTime, Global_active_power, type="l", ylab = "Global Active Power (kilowatts)"))
 dev.off()
 
