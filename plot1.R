@@ -2,13 +2,7 @@
 
 library(dplyr)
 
-# Download the data
-dataUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
-uciEpcFile <- "uci_epc_data.zip"
-download.file(dataUrl, uciEpcFile)
-
-# Uncompress downloaded file and load the data
-unzip(uciEpcFile, exdir = ".")
+#Load the data
 uciEpcData <- read.csv("household_power_consumption.txt", sep = ";", header = TRUE)
 
 # Change the class type of the numeric columns
